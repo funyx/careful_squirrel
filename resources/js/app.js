@@ -5,6 +5,7 @@
  */
 
 import './bootstrap';
+import 'laravel-datatables-vite';
 import { createApp } from 'vue';
 
 /**
@@ -14,17 +15,6 @@ import { createApp } from 'vue';
  */
 
 const app = createApp({});
-
-app.use({
-    install: (app) => {
-        // const opts = {};
-        // const socket = io('http://localhost:3000', opts)
-        const socket = io('http://localhost:3000')
-        app.config.globalProperties.$socket = socket
-        app.provide('socket', socket)
-    }
-})
-
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
