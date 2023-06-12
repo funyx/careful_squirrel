@@ -1,5 +1,7 @@
 <?php
 
+use App\Broadcasting\MessageChannel;
+use App\Broadcasting\PrivateMessageChannel;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+Broadcast::channel('App.Models.User.{id}', static function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+// public messages
+Broadcast::channel('message', MessageChannel::class, ['guards' => ['web']]);
+// private messages
+Broadcast::channel('message.{recipientId}', PrivateMessageChannel::class, ['guards' => ['web']]);

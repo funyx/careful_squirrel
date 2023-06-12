@@ -7,7 +7,7 @@
 import './bootstrap';
 import 'laravel-datatables-vite';
 import { createApp } from 'vue';
-
+import moment from 'moment';
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -15,9 +15,20 @@ import { createApp } from 'vue';
  */
 
 const app = createApp({});
+
+app.config.globalProperties.$moment=moment;
+
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+app.component('v-select', vSelect)
+import InfiniteLoading from 'v3-infinite-loading';
+app.component('infinite-loading', InfiniteLoading);
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
-
+import MessagesList from './components/MessagesList.vue';
+app.component('message-list', MessagesList);
+import MessageCreate from './components/MessageCreate.vue';
+app.component('message-create', MessageCreate);
 
 /**
  * The following block of code may be used to automatically register your
